@@ -1,5 +1,8 @@
 package pizzana;
 import pizzana.payments.*;
+import pizzana.bills.*;
+import pizzana.discounts.*;
+import pizzana.observers.*;
 
 public class Pizzana {
     public static void main(String[] args) {
