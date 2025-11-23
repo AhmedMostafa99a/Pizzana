@@ -24,7 +24,10 @@ public class RestaurantFacade {
     }
 
     public void showMenu() {
-        
+        menus.showMainMenu();
+        menus.showKidsMenu(new KidsFactory());
+        menus.showVegetarianMenu(new VegetarianFactory());
+        menus.showNonVegMenu(new NonVegFactory());
     }
 
     public OrderingSystem getOrdering() {

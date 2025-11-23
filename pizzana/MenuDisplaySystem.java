@@ -25,6 +25,7 @@ public class MenuDisplaySystem {
         printFactoryMeals(factory);
     }
 
+
     public void showVegetarianMenu(IMenuFactory factory) {
         System.out.println("===== Vegetarian Menu =====");
         printFactoryMeals(factory);
