@@ -1,6 +1,7 @@
 package pizzana.bills;
 import java.util.ArrayList;
-import pizzana.Meal;
+
+import pizzana.meals.Meal;
 
 public class Order {
     private ArrayList<OrderItem> items;

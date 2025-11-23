@@ -1,5 +1,8 @@
 package pizzana;
 
+import pizzana.meals.Meal;
+import pizzana.meals.SimpleMeal;
+
 public class VegetarianFactory implements IMenuFactory {
     @Override
     public Meal createAppetizer() {

@@ -1,5 +1,7 @@
 package pizzana;
 
+import pizzana.meals.Meal;
+
 public abstract class MealDecorator implements Meal {
     protected final Meal wrappedItem;
 

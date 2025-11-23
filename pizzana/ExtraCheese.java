@@ -1,4 +1,7 @@
 package pizzana;
+
+import pizzana.meals.Meal;
+
 public class ExtraCheese extends MealDecorator {
     private final double extra = 1.50;
 

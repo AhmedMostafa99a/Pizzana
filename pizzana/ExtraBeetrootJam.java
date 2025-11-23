@@ -1,4 +1,7 @@
 package pizzana;
+
+import pizzana.meals.Meal;
+
 public class ExtraBeetrootJam extends MealDecorator {
     private final double extra = 0.90;
 

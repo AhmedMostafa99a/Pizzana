@@ -1,5 +1,7 @@
 package pizzana;
 
+import pizzana.meals.Meal;
+
 public class MenuDisplaySystem {
 
     public void showMainMenu() {

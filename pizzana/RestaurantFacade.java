@@ -1,4 +1,7 @@
 package pizzana;
+import meals.Meal;
+import pizzana.bills.Bill;
+import pizzana.bills.Order;
 
 public class RestaurantFacade {
     private  OrderingSystem ordering;

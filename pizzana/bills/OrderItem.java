@@ -1,5 +1,5 @@
 package pizzana.bills;
-import pizzana.Meal;
+import pizzana.meals.Meal;
 
 public class OrderItem {
     public Meal meal;

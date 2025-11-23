@@ -1,5 +1,7 @@
 package pizzana;
 
+import pizzana.meals.Meal;
+
 public class Burger implements Meal {
     private final String name;
     private final double baseCost;

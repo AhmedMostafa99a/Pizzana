@@ -1,5 +1,8 @@
 package pizzana;
- abstract class MealStore {
+
+import pizzana.meals.Meal;
+
+abstract class MealStore {
   
     public Meal orderPizza(String type, double cost) {
         Meal pizza = createPizza(type, cost);
