@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import pizzana.bills.*;
 import pizzana.discounts.*;
-import pizzana.meals.Meal;
 import pizzana.observers.*;
 import pizzana.payments.*;
 import pizzana.meals.*;
@@ -15,11 +14,24 @@ public class Pizzana {
 
     public static void main(String[] args) {
  
-        MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
-        // menuDisplay.showMainMenu();
-        Order order = new Order();
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
+       MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
+       ArrayList<PizzaMeal> pizzas = new ArrayList<>();
+        pizzas.add(new PizzaMeal("Italian Pizza" , 50.0));
+        pizzas.add(new PizzaMeal("Eastern Pizza", 45.0));
+
+
+        ArrayList<BurgerMeal> burgers = new ArrayList<>();
+        burgers.add(new BurgerMeal("Classic Burger", 40.0));
+
+        ArrayList<Meal> total_meals = new ArrayList<>();
+        total_meals.addAll(pizzas);
+        total_meals.addAll(burgers);
+
+        menuDisplay.showMainMenu(pizzas, burgers);
+
+        Order order = new Order();
         // While adding new meals to order
 mealsLoop:
         while (true){
@@ -32,16 +44,19 @@ mealsLoop:
                 continue;
             }
             switch (mealOption) {
-                case 1:
-                    // selectedMeal = new Burger();
-                    selectedMeal = new SimpleMeal("Burger", 5.0);
+
+                case 1 :
+                    selectedMeal = pizzas.get(0);
                     break;
-                case 2:
-                    selectedMeal = new SimpleMeal("Pizza", 5.0);
+                case 2 :
+                    selectedMeal = pizzas.get(1);
                     break;
-                case 3:
-                    selectedMeal = new SimpleMeal("blabla", 5.0);
+                case 3 :
+                    selectedMeal = burgers.get(0);
                     break;
+                default:
+                    System.out.println("Invalid meal option. Please try again.");
+                    continue;
             }
 extraLoop:
             while (true)

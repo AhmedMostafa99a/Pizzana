@@ -1,19 +1,19 @@
 package pizzana;
 
 import java.util.ArrayList;
-
 import pizzana.meals.BurgerMeal;
 import pizzana.meals.Meal;
 import pizzana.meals.PizzaMeal;
 
 public class MenuDisplaySystem {
 
-    public void showMainMenu(ArrayList<BurgerMeal> burgers , ArrayList<PizzaMeal> pizzas) {
+    // Main menu receives meals dynamically from Main
+    public void showMainMenu(ArrayList<PizzaMeal> pizzas, ArrayList<BurgerMeal> burgers) {
         System.out.println("===== Main Menu =====");
-
+    
         System.out.println("Pizzas:");
         for (PizzaMeal pizza : pizzas) {
-            System.out.println( pizza.getName() + " - " + pizza.getCost() + "$");
+            System.out.println(pizza.getName() + " - " + pizza.getCost() + "$");
         }
 
         System.out.println("\nBurgers:");
@@ -33,7 +33,6 @@ public class MenuDisplaySystem {
         System.out.println("===== Kids Menu (Abstract Factory) =====");
         printFactoryMeals(factory);
     }
-
 
     public void showVegetarianMenu(IMenuFactory factory) {
         System.out.println("===== Vegetarian Menu =====");
