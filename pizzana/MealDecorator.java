@@ -1,3 +1,5 @@
+package pizzana;
+
 public abstract class MealDecorator implements Meal {
     protected final Meal wrappedItem;
 

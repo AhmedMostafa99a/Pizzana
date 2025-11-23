@@ -1,3 +1,5 @@
+package pizzana;
+
 public class KidsFactory implements IMenuFactory {
     @Override
     public Meal createAppetizer() {

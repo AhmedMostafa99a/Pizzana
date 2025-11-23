@@ -1,3 +1,5 @@
+package pizzana;
+
 public class ItalianPizzaStore extends MealStore {
     @Override
     protected Meal createPizza() {

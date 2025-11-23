@@ -1,4 +1,4 @@
-// MealStore.java
+package pizzana;
  abstract class MealStore {
   
     public Meal orderPizza() {

@@ -1,3 +1,5 @@
+package pizzana;
+
 public class SimpleMeal implements Meal {
     private final String name;
     private final double cost;

@@ -1,3 +1,4 @@
+package pizzana;
 public class BurgerStore extends MealStore {
  
     @Override

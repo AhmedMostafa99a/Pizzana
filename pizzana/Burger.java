@@ -1,3 +1,5 @@
+package pizzana;
+
 public class Burger implements Meal {
     private final String name;
     private final double baseCost;

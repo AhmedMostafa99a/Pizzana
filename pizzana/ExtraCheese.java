@@ -1,3 +1,4 @@
+package pizzana;
 public class ExtraCheese extends MealDecorator {
     private final double extra = 1.50;
 
