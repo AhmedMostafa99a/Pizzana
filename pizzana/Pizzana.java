@@ -115,12 +115,12 @@ extraLoop:
         switch (paymentMethod) {
             case 1:
                 System.out.print("Enter credit card number: ");
-                String cardNumber = scanner.nextLine();
+                String cardNumber = scanner.next();
                 paymentStrategy = new CreditPayment(cardNumber);
                 break;
             case 2:
                 System.out.print("Enter mobile number: ");
-                String mobileNumber = scanner.nextLine();
+                String mobileNumber = scanner.next();
                 paymentStrategy = new MobileWalletPayment(mobileNumber);
                 break;
             case 3:
