@@ -15,8 +15,10 @@ public class Pizzana {
 
     public static void main(String[] args) {
  
-        menuDisplay.showMainMenu();
+        MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
+        // menuDisplay.showMainMenu();
         Order order = new Order();
+        Scanner scanner = new Scanner(System.in);
 
         // While adding new meals to order
 mealsLoop:
@@ -31,13 +33,14 @@ mealsLoop:
             }
             switch (mealOption) {
                 case 1:
-                    selectedMeal = new Burger();
+                    // selectedMeal = new Burger();
+                    selectedMeal = new SimpleMeal("Burger", 5.0);
                     break;
                 case 2:
-                    selectedMeal = new EasternPizza();
+                    selectedMeal = new SimpleMeal("Pizza", 5.0);
                     break;
                 case 3:
-                    selectedMeal = new ClassicBurger();
+                    selectedMeal = new SimpleMeal("blabla", 5.0);
                     break;
             }
 extraLoop:
