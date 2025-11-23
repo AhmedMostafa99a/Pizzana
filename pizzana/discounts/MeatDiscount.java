@@ -1,6 +1,7 @@
 package pizzana.discounts;
 
 import pizzana.bills.OrderItem;
+import pizzana.meals.MeatMeal;
 
 public class MeatDiscount implements Discount {
     private static final double DISCOUNT_RATE = 0.10; // 10% discount
