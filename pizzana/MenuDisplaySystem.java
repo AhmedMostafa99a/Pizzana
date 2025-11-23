@@ -12,13 +12,15 @@ public class MenuDisplaySystem {
         System.out.println("===== Main Menu =====");
     
         System.out.println("Pizzas:");
-        for (PizzaMeal pizza : pizzas) {
-            System.out.println(pizza.getName() + " - " + pizza.getCost() + "$");
-        }
+        for (int i = 0; i < pizzas.size(); i++) {
+        PizzaMeal pizza = pizzas.get(i);
+        System.out.println((i + 1) + ". " + pizza.getName() + " - " + pizza.getCost() + "$");
+    }
 
         System.out.println("\nBurgers:");
-        for (BurgerMeal burger : burgers) {
-            System.out.println(burger.getName() + " - " + burger.getCost() + "$");
+        for (int i = 0; i < burgers.size(); i++) {
+            BurgerMeal burger = burgers.get(i);
+            System.out.println((i + 1) + ". " + burger.getName() + " - " + burger.getCost() + "$");
         }
 
         System.out.println("\nAdd-ons:");
