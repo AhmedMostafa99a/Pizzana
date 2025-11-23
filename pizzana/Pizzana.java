@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import pizzana.bills.*;
 import pizzana.discounts.*;
+import pizzana.meals.Meal;
 import pizzana.observers.*;
 import pizzana.payments.*;
 import pizzana.meals.*;
@@ -13,10 +14,7 @@ import pizzana.meals.*;
 public class Pizzana {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Pizzana!");
-        Scanner scanner = new Scanner(System.in);
-
-        MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
+ 
         menuDisplay.showMainMenu();
         Order order = new Order();
 
@@ -126,5 +124,6 @@ extraLoop:
         System.out.println("Thank you for dining at Pizzana!");
         System.out.println("Have a nice meal!");
         scanner.close();
+        billingService.payBill(bill, paymentStrategy);
     }
 }

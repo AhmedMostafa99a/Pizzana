@@ -1,18 +1,25 @@
 package pizzana;
 
+import java.util.ArrayList;
+
+import pizzana.meals.BurgerMeal;
 import pizzana.meals.Meal;
+import pizzana.meals.PizzaMeal;
 
 public class MenuDisplaySystem {
 
-    public void showMainMenu() {
-        System.out.println("===== Main Menu (Factory Method Meals) =====");
+    public void showMainMenu(ArrayList<BurgerMeal> burgers , ArrayList<PizzaMeal> pizzas) {
+        System.out.println("===== Main Menu =====");
 
         System.out.println("Pizzas:");
-        System.out.println("1) Italian Pizza - 8.00$");
-        System.out.println("2) Eastern Pizza - 7.50$");
+        for (PizzaMeal pizza : pizzas) {
+            System.out.println( pizza.getName() + " - " + pizza.getCost() + "$");
+        }
 
         System.out.println("\nBurgers:");
-        System.out.println("3) Classic Burger - 5.00$");
+        for (BurgerMeal burger : burgers) {
+            System.out.println(burger.getName() + " - " + burger.getCost() + "$");
+        }
 
         System.out.println("\nAdd-ons:");
         System.out.println("- Extra Cheese (+1.50$)");
