@@ -1,10 +1,10 @@
 package pizzana.meals;
 
-public class CheckinMeal implements Meal {
+public class ChickenMeal implements Meal {
     private final String name;
     private final double cost;
 
-    public CheckinMeal(String name, double cost) {
+    public ChickenMeal(String name, double cost) {
         this.name = name;
         this.cost = cost;
     }
