@@ -14,11 +14,13 @@ public class Pizzana {
 
     public static void main(String[] args) {
  
+
         Scanner scanner = new Scanner(System.in);
        MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
        ArrayList<PizzaMeal> pizzas = new ArrayList<>();
         pizzas.add(new PizzaMeal("Italian Pizza" , 50.0));
         pizzas.add(new PizzaMeal("Eastern Pizza", 45.0));
+
 
         ArrayList<BurgerMeal> burgers = new ArrayList<>();
         burgers.add(new BurgerMeal("Classic Burger", 40.0));
@@ -42,6 +44,7 @@ mealsLoop:
                 continue;
             }
             switch (mealOption) {
+
                 case 1 :
                     selectedMeal = pizzas.get(0);
                     break;
@@ -128,7 +131,17 @@ extraLoop:
                 paymentStrategy = new CashPayment();
                 break;
         }
+        System.out.println("Are you sure you want to pay " + bill.getTotalPrice() + "? (yes/no)");
+        String confirmPayment = scanner.next();
+        if (confirmPayment.equalsIgnoreCase("yes")) {
+            billingService.payBill(bill, paymentStrategy);
+        } else {
+            System.out.println("Payment cancelled.");
+            return;
+        }
+        System.out.println("Thank you for dining at Pizzana!");
+        System.out.println("Have a nice meal!");
+        scanner.close();
         billingService.payBill(bill, paymentStrategy);
-
     }
 }

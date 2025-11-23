@@ -33,6 +33,7 @@ public class Bill {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Bill Details:\n");
         for (BillItem item : billItems) {
             Double purePrice = item.orderItem.meal.getCost() * item.orderItem.quantity;
             Double discountedPrice = purePrice - (item.discount * purePrice);
