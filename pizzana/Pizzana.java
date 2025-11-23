@@ -115,6 +115,16 @@ extraLoop:
                 paymentStrategy = new CashPayment();
                 break;
         }
-        billingService.payBill(bill, paymentStrategy);
+        System.out.println("Are you sure you want to pay " + bill.getTotalPrice() + "? (yes/no)");
+        String confirmPayment = scanner.next();
+        if (confirmPayment.equalsIgnoreCase("yes")) {
+            billingService.payBill(bill, paymentStrategy);
+        } else {
+            System.out.println("Payment cancelled.");
+            return;
+        }
+        System.out.println("Thank you for dining at Pizzana!");
+        System.out.println("Have a nice meal!");
+        scanner.close();
     }
 }
