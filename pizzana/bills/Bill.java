@@ -31,4 +31,19 @@ public class Bill {
         }
         return total;
     }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (BillItem item : billItems) {
+            Double purePrice = item.orderItem.meal.getCost() * item.orderItem.quantity;
+            Double discountedPrice = purePrice - (item.discount * purePrice);
+            sb.append(item.orderItem.meal.getName())
+              .append(" x")
+              .append(item.orderItem.quantity)
+              .append(": ")
+              .append(String.format("%.2f", discountedPrice))
+              .append("\n");
+        }
+        sb.append("Total: ").append(String.format("%.2f", getTotalPrice()));
+        return sb.toString();
+    }
 }

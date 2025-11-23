@@ -9,6 +9,6 @@ public class OrderItem {
         this.quantity = quantity;
     }
     public Double getTotalPrice() {
-        return this.meal.getPrice() * this.quantity;
+        return this.meal.getCost() * this.quantity;
     }
 }

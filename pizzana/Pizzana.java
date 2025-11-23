@@ -9,33 +9,111 @@ import pizzana.discounts.*;
 import pizzana.meals.Meal;
 import pizzana.observers.*;
 import pizzana.payments.*;
+import pizzana.meals.*;
 
 public class Pizzana {
 
     public static void main(String[] args) {
-        ArrayList<Meal> burgers = new ArrayList<Meal>();
-        ArrayList<Meal> pizzas = new ArrayList<Meal>();
-        System.out.println("Welcome to Pizzana!");
-        Scanner scanner = new Scanner(System.in);
+ 
+        menuDisplay.showMainMenu();
+        Order order = new Order();
 
-        MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
-        menuDisplay.showMainMenu(burgers, pizzas);
-        System.out.print("Please select your meal options: ");
-        Integer mealOptions = scanner.nextInt();
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
-
-        while (true)
-        {
-            System.out.print("Enter meal name (or 'done' to finish): ");
-            String mealName = scanner.nextLine();
-            if (mealName.equalsIgnoreCase("done")) {
-                break;
+        // While adding new meals to order
+mealsLoop:
+        while (true){
+            // While adding extra items to a meal
+            System.out.print("Please select your meal options: ");
+            Integer mealOption = scanner.nextInt();
+            Meal selectedMeal = null;
+            if(mealOption != 1 && mealOption != 2 && mealOption != 3){
+                System.out.println("Invalid meal option. Please try again.");
+                continue;
             }
-            System.out.print("Enter quantity: ");
-            Integer quantity = scanner.nextInt();
-
-            System.out
+            switch (mealOption) {
+                case 1:
+                    selectedMeal = new Burger();
+                    break;
+                case 2:
+                    selectedMeal = new EasternPizza();
+                    break;
+                case 3:
+                    selectedMeal = new ClassicBurger();
+                    break;
+            }
+extraLoop:
+            while (true)
+            {
+                System.out.println("Do u want to add any extra (extra code or -1 for none)?");
+                Integer extraOption = scanner.nextInt();
+                if (extraOption == -1){
+                    System.out.print("Enter quantity of this meal: ");
+                    Integer quantity = scanner.nextInt();
+                    order.addMeal(selectedMeal, quantity);
+                    break;
+                } else {
+                    switch (extraOption) {
+                        case 1:
+                            selectedMeal = new ExtraCheese(selectedMeal);
+                            break;
+                        case 2:
+                            selectedMeal = new ExtraSauce(selectedMeal);
+                            break;
+                        case 3:
+                            selectedMeal = new ExtraBeetrootJam(selectedMeal);
+                            break;
+                        default:
+                            System.out.println("Invalid extra option. Please try again.");
+                            continue extraLoop;
+                    }
+                    System.out.println("Extra added. Current meal: " + selectedMeal.getName() + " - " + selectedMeal.getCost() + "$");
+                }
+            }
+            while (true){
+                System.out.println("Do you want to add more meals? (yes/no)");
+                String moreMeals = scanner.next();
+                if (moreMeals.equalsIgnoreCase("no")){
+                    break mealsLoop;
+                } else if (moreMeals.equalsIgnoreCase("yes")){
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                }
+            }
         }
-        
+        BillingService billingService = new BillingService();
+        // Discounts
+        Discount pizzaDiscount = new PizzaDiscount();
+        Discount meatDiscount = new MeatDiscount();
+        Discount chicketDiscount = new ChickenDiscount();
+        billingService.addDiscount(pizzaDiscount);
+        billingService.addDiscount(meatDiscount);
+        billingService.addDiscount(chicketDiscount);
+        // Creating bill
+        Bill bill = billingService.createBill(order);
+        System.out.println(bill.toString());
+        System.out.println("Please select payment method (1: Credit Card, 2: Mobile Wallet, 3: Cash): ");
+        Integer paymentMethod = scanner.nextInt();
+        PaymentMethod paymentStrategy = null;
+        switch (paymentMethod) {
+            case 1:
+                System.out.print("Enter credit card number: ");
+                String cardNumber = scanner.nextLine();
+                paymentStrategy = new CreditPayment(cardNumber);
+                break;
+            case 2:
+                System.out.print("Enter mobile number: ");
+                String mobileNumber = scanner.nextLine();
+                paymentStrategy = new MobileWalletPayment(mobileNumber);
+                break;
+            case 3:
+                paymentStrategy = new CashPayment();
+                break;
+            default:
+                System.out.println("Invalid payment method. Defaulting to Cash.");
+                paymentStrategy = new CashPayment();
+                break;
+        }
+        billingService.payBill(bill, paymentStrategy);
+
     }
 }
