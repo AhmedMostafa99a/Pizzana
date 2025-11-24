@@ -17,8 +17,8 @@ public class MenuDisplaySystem {
         System.out.println("\n===== Kids Menu =====");
         int i = 1;
        for (Meal meal : new Meal[]{
+           factory.createBurger(),
             factory.createPizza(),
-            factory.createBurger(),
             factory.createChickenMeal()
         }) {
             System.out.println(i + meal.getName() + " - $" + meal.getCost());
@@ -31,8 +31,8 @@ public class MenuDisplaySystem {
         System.out.println("\n===== Vegetarian Menu =====");
         int i = 1;
        for (Meal meal : new Meal[]{
+           factory.createBurger(),
             factory.createPizza(),
-            factory.createBurger(),
             factory.createChickenMeal()
         }) {
             System.out.println(i + meal.getName() + " - $" + meal.getCost());
@@ -45,8 +45,8 @@ public class MenuDisplaySystem {
         System.out.println("\n===== Non-Vegetarian Menu =====");
         int i = 1;
        for (Meal meal : new Meal[]{
+           factory.createBurger(),
             factory.createPizza(),
-            factory.createBurger(),
             factory.createChickenMeal()
         }) {
             System.out.println(i + meal.getName() + " - $" + meal.getCost());
