@@ -9,16 +9,16 @@ import pizzana.meals.SimpleMeal;
 public class NonVegFactory implements IMenuFactory {
     @Override
     public Meal createPizza() {
-        return new SimpleMeal("Non-Veg Supreme Pizza", 65.0);
+        return new PizzaMeal("Non-Veg Supreme Pizza", 65.0);
     }
 
     @Override
     public Meal createBurger() {
-        return new SimpleMeal("Non-Veg Beef Burger", 55.0);
+        return new BurgerMeal("Non-Veg Beef Burger", 55.0);
     }
 
     @Override
     public Meal createChickenMeal() {
-        return new SimpleMeal("Non-Veg Chicken Meal", 50.0);
+        return new ChickenMeal("Non-Veg Chicken Meal", 50.0);
     }
 }

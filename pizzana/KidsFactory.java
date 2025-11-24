@@ -9,16 +9,16 @@ import pizzana.meals.SimpleMeal;
 public class KidsFactory implements IMenuFactory {
  @Override
     public Meal createPizza() {
-        return new SimpleMeal("Kids Pizza", 25.0);
+        return new PizzaMeal("Kids Pizza", 25.0);
     }
 
     @Override
     public Meal createBurger() {
-        return new SimpleMeal("Kids Burger", 20.0);
+        return new BurgerMeal("Kids Burger", 20.0);
     }
 
     @Override
     public Meal createChickenMeal() {
-        return new SimpleMeal("Kids Chicken Nuggets", 15.0);
+        return new ChickenMeal("Kids Chicken Nuggets", 15.0);
     }
 }

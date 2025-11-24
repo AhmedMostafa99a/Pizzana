@@ -13,3 +13,4 @@ public class BurgerDiscount implements Discount {
         }
         return item.getTotalPrice() * (1 - DISCOUNT_RATE);
 }
+}
