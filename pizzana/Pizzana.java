@@ -12,9 +12,9 @@ public class Pizzana {
 
     public static void showAddonsMenu() {
         System.out.println("\n===== Available Add-ons =====");
-        System.out.println("1. Extra Cheese (+$2.00)");
-        System.out.println("2. Extra Sauce (+$1.50)");
-        System.out.println("3. Extra Beetroot Jam (+$1.00)");
+        System.out.println("1. Extra Cheese (+$1.50)");
+        System.out.println("2. Extra Sauce (+$0.75)");
+        System.out.println("3. Extra Beetroot Jam (+$2.00)");
         System.out.println("-1. No more add-ons");
         System.out.println("==============================");
     }
