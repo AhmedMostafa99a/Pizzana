@@ -1,12 +1,17 @@
 package pizzana;
 
+import pizzana.meals.BurgerMeal;
 import pizzana.meals.Meal;
-import pizzana.meals.SimpleMeal;
 
 public class BurgerStore extends MealStore {
- 
     @Override
-    protected Meal createBurger(String type, double cost) {
-        return new SimpleMeal(type, cost);
+    protected Meal createMeal(String type) {
+        if (type.equalsIgnoreCase("Classic")) {
+            return new BurgerMeal("Classic Beef Burger", 55.0);
+        } else if (type.equalsIgnoreCase("Chicken")) {
+            return new BurgerMeal("Chicken Burger", 50.0);
+        } else {
+            return new BurgerMeal("Generic Burger", 45.0);
+        }
     }
 }

@@ -1,9 +1,10 @@
 package pizzana.observers;
 import java.util.ArrayList;
+import java.util.Observer;
 
 import pizzana.bills.Order;
 
-class OrdersEventManager {
+class OrdersEventManager  {
     private ArrayList<OrdersListener> subscribers;
     void subscribe(OrdersListener listener){
         if(subscribers == null){

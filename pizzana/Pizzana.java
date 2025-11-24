@@ -1,68 +1,127 @@
 package pizzana;
-import pizzana.payments.*;
-import java.util.ArrayList;
-
 import java.util.Scanner;
-
-import pizzana.bills.*;
-import pizzana.discounts.*;
-import pizzana.observers.*;
-import pizzana.payments.*;
 import pizzana.meals.*;
+import pizzana.bills.*;
+import pizzana.observers.*;
+import pizzana.discounts.*;
+import pizzana.payments.*;
+import java.util.*;
 
 public class Pizzana {
+    private static Order currentOrder;
+
+    public static void choice(IMenuFactory factory) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                Meal burger = factory.createBurger();
+                System.out.print("Enter quantity: ");
+                int quantity = scanner.nextInt();
+                currentOrder.addMeal(burger, quantity);
+                System.out.println("You selected: " + burger.getName() + " - $" + burger.getCost());
+                break;
+            case 2:
+                Meal pizza = factory.createPizza();
+                System.out.print("Enter quantity: ");
+                int quantity2 = scanner.nextInt();
+                currentOrder.addMeal(pizza, quantity2);
+                System.out.println("You selected: " + pizza.getName() + " - $" + pizza.getCost());
+                break;
+            case 3:
+                Meal chickenMeal = factory.createChickenMeal();
+                System.out.print("Enter quantity: ");
+                int quantity3 = scanner.nextInt();
+                currentOrder.addMeal(chickenMeal, quantity3);
+                System.out.println("You selected: " + chickenMeal.getName() + " - $" + chickenMeal.getCost());
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
 
     public static void main(String[] args) {
- 
-
         Scanner scanner = new Scanner(System.in);
-       MenuDisplaySystem menuDisplay = new MenuDisplaySystem();
-       ArrayList<PizzaMeal> pizzas = new ArrayList<>();
-        pizzas.add(new PizzaMeal("Italian Pizza" , 50.0));
-        pizzas.add(new PizzaMeal("Eastern Pizza", 45.0));
+        OrdersEventManager eventManager = new OrdersEventManager();
+        OrderingSystem orderingSystem = new OrderingSystem(eventManager);
+        currentOrder = orderingSystem.createOrder();
 
+        // Subscribe observers
+        orderingSystem.subscribe(new Kitchen());
+        orderingSystem.subscribe(new Waiter());
 
-        ArrayList<BurgerMeal> burgers = new ArrayList<>();
-        burgers.add(new BurgerMeal("Classic Burger", 40.0));
+        System.out.println("Welcome to Pizzana Restaurant!");
 
-        ArrayList<Meal> total_meals = new ArrayList<>();
-        total_meals.addAll(pizzas);
-        total_meals.addAll(burgers);
+        boolean continueOrdering = true;
 
-        menuDisplay.showMainMenu(pizzas, burgers);
+        while (continueOrdering) {
+            // Show main menu categories
+            MenuDisplaySystem menuDisplaySystem = new MenuDisplaySystem();
+            menuDisplaySystem.showMainMenu();
 
-        Order order = new Order();
-        // While adding new meals to order
-mealsLoop:
-        while (true){
-            // While adding extra items to a meal
-            System.out.print("Please select your meal options: ");
-            Integer mealOption = scanner.nextInt();
-            Meal selectedMeal = null;
-            if(mealOption != 1 && mealOption != 2 && mealOption != 3){
-                System.out.println("Invalid meal option. Please try again.");
-                continue;
-            }
-            switch (mealOption) {
+            int categoryChoice = scanner.nextInt();
+            IMenuFactory menuFactory;
 
-                case 1 :
-                    selectedMeal = pizzas.get(0);
+            switch (categoryChoice) {
+                case 1:
+                    menuFactory = new KidsFactory();
+                    menuDisplaySystem.showKidsMenu(menuFactory);
+                    System.out.print("Choose your meal (1-3): ");
+                    choice(menuFactory);
                     break;
-                case 2 :
-                    selectedMeal = pizzas.get(1);
+                case 2:
+                    menuFactory = new VegetarianFactory();
+                    menuDisplaySystem.showVegetarianMenu(menuFactory);
+                    System.out.print("Choose your meal (1-3): ");
+                    choice(menuFactory);
                     break;
-                case 3 :
-                    selectedMeal = burgers.get(0);
+                case 3:
+                    menuFactory = new NonVegFactory();
+                    menuDisplaySystem.showNonVegMenu(menuFactory);
+                    System.out.print("Choose your meal (1-3): ");
+                    choice(menuFactory);
                     break;
                 default:
-                    System.out.println("Invalid meal option. Please try again.");
+                    System.out.println("Invalid choice.");
                     continue;
             }
+
+            // Ask if user wants to add more items
+            System.out.println("\nDo you want to add more items? (yes/no)");
+            String moreItems = scanner.next();
+            if (moreItems.equalsIgnoreCase("no")) {
+                continueOrdering = false;
+            }
+        }
+
+        // Place the order
+        orderingSystem.placeOrder(currentOrder);
+
+
+    //    RestaurantFacade facade = new RestaurantFacade(orderingSystem, billingService, menuDisplaySystem);
+       
+    //    System.out.println("======hello in Pizzana!=======");
+    //    ArrayList <Meal> meals = new ArrayList<>();
+    //    meals.add(new BurgerStore().createMeal("Classic"));
+    //    meals.add(new ItalianPizzaStore().createMeal("Italian"));
+    //    meals.add(new EasternPizzaStore().createMeal("Eastern"));
+        
+    //    menuDisplaySystem.showMainMenu(meals);
+
+        
+
+        // Order order = facade.startNewOrder();
+
+
+        // While adding new meals to order
+
 extraLoop:
             while (true)
             {
                 System.out.println("Do u want to add any extra (extra code or -1 for none)?");
-                Integer extraOption = scanner.nextInt();
+                int extraOption = scanner.nextInt();
                 if (extraOption == -1){
                     System.out.print("Enter quantity of this meal: ");
                     Integer quantity = scanner.nextInt();
@@ -86,18 +145,7 @@ extraLoop:
                     System.out.println("Extra added. Current meal: " + selectedMeal.getName() + " - " + selectedMeal.getCost() + "$");
                 }
             }
-            while (true){
-                System.out.println("Do you want to add more meals? (yes/no)");
-                String moreMeals = scanner.next();
-                if (moreMeals.equalsIgnoreCase("no")){
-                    break mealsLoop;
-                } else if (moreMeals.equalsIgnoreCase("yes")){
-                    break;
-                } else {
-                    System.out.println("Invalid input. Please enter 'yes' or 'no'.");
-                }
-            }
-        }
+
         BillingService billingService = new BillingService();
         // Discounts
         Discount pizzaDiscount = new PizzaDiscount();
@@ -115,12 +163,12 @@ extraLoop:
         switch (paymentMethod) {
             case 1:
                 System.out.print("Enter credit card number: ");
-                String cardNumber = scanner.nextLine();
+                String cardNumber = scanner.next();
                 paymentStrategy = new CreditPayment(cardNumber);
                 break;
             case 2:
                 System.out.print("Enter mobile number: ");
-                String mobileNumber = scanner.nextLine();
+                String mobileNumber = scanner.next();
                 paymentStrategy = new MobileWalletPayment(mobileNumber);
                 break;
             case 3:

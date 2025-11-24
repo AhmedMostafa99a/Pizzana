@@ -1,39 +1,50 @@
 package pizzana;
-import meals.Meal;
+
 import pizzana.bills.Bill;
 import pizzana.bills.Order;
+import pizzana.meals.Meal;
+import pizzana.payments.PaymentMethod;
 
 public class RestaurantFacade {
-    private  OrderingSystem ordering;
-    private  BillingService billing;
-    private  MenuDisplaySystem menus;
+    private final OrderingSystem orderingSystem;
+    private final BillingService billingService;
+    private final MenuDisplaySystem menuDisplaySystem;
 
-    public RestaurantFacade(OrderingSystem ordering, BillingService billing, MenuDisplaySystem menus) {
-        this.ordering = ordering;
-        this.billing = billing;
-        this.menus = menus;
+    public RestaurantFacade(OrderingSystem orderingSystem, BillingService billingService, MenuDisplaySystem menuDisplaySystem) {
+        this.orderingSystem = orderingSystem;
+        this.billingService = billingService;
+        this.menuDisplaySystem = menuDisplaySystem;
     }
 
-    public Order createOrder() {
-      return ordering.createOrder()
+    public void displayMenu() {
+        menuDisplaySystem.showMainMenu();
+        menuDisplaySystem.showKidsMenu(new KidsFactory());
+        menuDisplaySystem.showVegetarianMenu(new VegetarianFactory());
+        menuDisplaySystem.showNonVegMenu(new NonVegFactory());
     }
 
-    public void addItem(Order order, Meal meal) {
-       ordering.addItem(order, meal);
+   
+    public Order startNewOrder() {
+        return orderingSystem.createOrder();
     }
 
-    public Bill checkout(Order order) {
-      billing.createBill(order)
+    public void addMealToOrder(Order order, Meal meal, int quantity) {
+        orderingSystem.addItem(order, meal, quantity);
     }
 
-    public void showMenu() {
-        menus.showMainMenu();
-        menus.showKidsMenu(new KidsFactory());
-        menus.showVegetarianMenu(new VegetarianFactory());
-        menus.showNonVegMenu(new NonVegFactory());
+    public void placeOrder(Order order) {
+        orderingSystem.placeOrder(order);
     }
 
-    public OrderingSystem getOrdering() {
-        return ordering;
+    public Bill checkoutAndPay(Order order, PaymentMethod paymentMethod) {
+
+        Bill bill = billingService.createBill(order);
+      billingService.payBill(bill, paymentMethod);
+        orderingSystem.completeOrder(order);
+        return bill;
+    }
+
+    public OrderingSystem getOrderingSystem() {
+        return orderingSystem;
     }
 }

@@ -1,21 +1,24 @@
 package pizzana;
 
+import pizzana.meals.BurgerMeal;
+import pizzana.meals.ChickenMeal;
 import pizzana.meals.Meal;
+import pizzana.meals.PizzaMeal;
 import pizzana.meals.SimpleMeal;
 
 public class NonVegFactory implements IMenuFactory {
     @Override
-    public Meal createAppetizer() {
-        return new SimpleMeal("Chicken Wings", 3.00);
+    public Meal createPizza() {
+        return new SimpleMeal("Non-Veg Supreme Pizza", 65.0);
     }
 
     @Override
-    public Meal createMainCourse() {
-        return new SimpleMeal("Grilled Chicken", 8.50);
+    public Meal createBurger() {
+        return new SimpleMeal("Non-Veg Beef Burger", 55.0);
     }
 
     @Override
-    public Meal createSalad() {
-        return new SimpleMeal("Caesar Salad", 3.50);
+    public Meal createChickenMeal() {
+        return new SimpleMeal("Non-Veg Chicken Meal", 50.0);
     }
 }

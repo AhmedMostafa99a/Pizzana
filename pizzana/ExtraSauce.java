@@ -3,19 +3,19 @@ package pizzana;
 import pizzana.meals.Meal;
 
 public class ExtraSauce extends MealDecorator {
-    private final double extra = 0.75;
+    private static final double COST = 0.75;
 
-    public ExtraSauce(Meal wrappedItem) {
-        super(wrappedItem);
+    public ExtraSauce(Meal decoratedMeal) {
+        super(decoratedMeal);
     }
 
     @Override
     public double getCost() {
-        return wrappedItem.getCost() + extra;
+        return super.getCost() + COST;
     }
 
     @Override
     public String getName() {
-        return wrappedItem.getName() + " + Extra Sauce";
+        return super.getName() + " + Extra Sauce";
     }
 }

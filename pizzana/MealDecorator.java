@@ -3,24 +3,19 @@ package pizzana;
 import pizzana.meals.Meal;
 
 public abstract class MealDecorator implements Meal {
-    protected final Meal wrappedItem;
+ protected Meal decoratedMeal;
 
-    public MealDecorator(Meal wrappedItem) {
-        this.wrappedItem = wrappedItem;
-    }
-
-    @Override
-    public String getName() {
-        return wrappedItem.getName();
+    public MealDecorator(Meal decoratedMeal) {
+        this.decoratedMeal = decoratedMeal;
     }
 
     @Override
     public double getCost() {
-        return wrappedItem.getCost();
+        return decoratedMeal.getCost();
     }
 
     @Override
-    public String toString() {
-        return wrappedItem.toString();
+    public String getName() {
+        return decoratedMeal.getName();
     }
 }
