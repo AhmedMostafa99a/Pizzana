@@ -158,7 +158,7 @@ public class Pizzana {
         billingService.addDiscount(meatDiscount);
         billingService.addDiscount(chicketDiscount);
         // Creating bill
-        Bill bill = billingService.createBill(order);
+        Bill bill = billingService.createBill(currentOrder);
         System.out.println(bill.toString());
         System.out.println("Please select payment method (1: Credit Card, 2: Mobile Wallet, 3: Cash): ");
         Integer paymentMethod = scanner.nextInt();

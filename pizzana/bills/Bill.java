@@ -42,6 +42,7 @@ public class Bill {
               .append(item.orderItem.quantity)
               .append(": ")
               .append(String.format("%.2f", discountedPrice))
+              .append((item.discount > 0 ? " (Discount applied: " + String.format("%.2f", item.discount * 100) + "%)" : ""))
               .append("\n");
         }
         sb.append("Total: ").append(String.format("%.2f", getTotalPrice()));

@@ -2,7 +2,7 @@ package pizzana.observers;
 
 import pizzana.bills.Order;
 
-class Kitchen implements OrdersListener {
+public class Kitchen implements OrdersListener {
     public void onOrderPlaced(Order order){
         System.out.println("Kitchen received order");
     }

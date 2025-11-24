@@ -26,8 +26,7 @@ public class OrderingSystem {
 
     public void placeOrder(Order order) {
        System.out.println("\n--- Order Placed ---");
-       System.out
-             .println("Order details: " + order.getItems().size() + " items, Total: $" + order.calculateTotalCost());
+       System.out.println("Order details: " + order.getItems().length + " items");
        eventManager.notifyOrderPlaced(order);
     }
 
