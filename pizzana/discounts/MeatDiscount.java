@@ -9,8 +9,8 @@ public class MeatDiscount implements Discount {
     @Override
     public double applyDiscount(OrderItem item) {
         if (item.meal instanceof MeatMeal) {
-            return item.getTotalPrice() * (1 - DISCOUNT_RATE);
+            return DISCOUNT_RATE;
         }
-        return item.getTotalPrice() * (1 - DISCOUNT_RATE);
+        return 0;
     }
 }
