@@ -71,7 +71,7 @@ public class Pizzana {
                 System.out.print("Enter quantity: ");
                 int quantity = scanner.nextInt();
                 currentOrder.addMeal(customizedBurger, quantity);
-                System.out.println("Added to order: " + customizedBurger.getName() + " x" + quantity + " - $" + customizedBurger.getCost());
+                System.out.println("Added to order: " + customizedBurger.getName() + " x" + quantity + " - $" + customizedBurger.getCost() * quantity);
                 break;
             case 2:
                 Meal pizza = factory.createPizza();
@@ -80,7 +80,7 @@ public class Pizzana {
                 System.out.print("Enter quantity: ");
                 int quantity2 = scanner.nextInt();
                 currentOrder.addMeal(customizedPizza, quantity2);
-                System.out.println("Added to order: " + customizedPizza.getName() + " x" + quantity2 + " - $" + customizedPizza.getCost());
+                System.out.println("Added to order: " + customizedPizza.getName() + " x" + quantity2 + " - $" + customizedPizza.getCost()* quantity2);
                 break;
             case 3:
                 Meal chickenMeal = factory.createChickenMeal();
@@ -89,7 +89,7 @@ public class Pizzana {
                 System.out.print("Enter quantity: ");
                 int quantity3 = scanner.nextInt();
                 currentOrder.addMeal(customizedChicken, quantity3);
-                System.out.println("Added to order: " + customizedChicken.getName() + " x" + quantity3 + " - $" + customizedChicken.getCost());
+                System.out.println("Added to order: " + customizedChicken.getName() + " x" + quantity3 + " - $" + customizedChicken.getCost() * quantity3);
                 break;
             default:
                 System.out.println("Invalid choice.");
@@ -112,7 +112,6 @@ public class Pizzana {
         boolean continueOrdering = true;
         
         while (continueOrdering) {
-            // Show main menu categories
             MenuDisplaySystem menuDisplaySystem = new MenuDisplaySystem();
             menuDisplaySystem.showMainMenu();
             
@@ -123,19 +122,19 @@ public class Pizzana {
                 case 1:
                     menuFactory = new KidsFactory();
                     menuDisplaySystem.showKidsMenu(menuFactory);
-                    System.out.print("Choose your meal (1-3): ");
+                    System.out.print("Choose your meal: ");
                     choice(menuFactory);
                     break;
                 case 2:
                     menuFactory = new VegetarianFactory();
                     menuDisplaySystem.showVegetarianMenu(menuFactory);
-                    System.out.print("Choose your meal (1-3): ");
+                    System.out.print("Choose your meal: ");
                     choice(menuFactory);
                     break;
                 case 3:
                     menuFactory = new NonVegFactory();
                     menuDisplaySystem.showNonVegMenu(menuFactory);
-                    System.out.print("Choose your meal (1-3): ");
+                    System.out.print("Choose your meal: ");
                     choice(menuFactory);
                     break;
                 default:
